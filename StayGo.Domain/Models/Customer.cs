@@ -1,9 +1,11 @@
+using System;
+
 namespace StayGo.Domain.Models
 {
     public class Customer
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private string DateBirth { get; set; }        
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime DateBirth { get; set; }        
     }
 }

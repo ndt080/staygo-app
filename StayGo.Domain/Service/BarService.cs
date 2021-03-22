@@ -3,53 +3,46 @@ using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
-    public class BarService : IBarService<Bar>
+    public class BarService : IBarService
     {
-        private readonly IBarService<Bar> _barServiceImplementation;
-
-        public BarService(IBarService<Bar> barServiceImplementation)
+        Bar IBarService.GetBarById(int id)
         {
-            _barServiceImplementation = barServiceImplementation;
+            return new Bar();
         }
 
-        Bar IBarService<Bar>.GetBarById(int id)
+        List<Bar> IBarService.GetBarsByName(string name)
         {
-            return _barServiceImplementation.GetBarById(id);
+            return new List<Bar>();
         }
 
-        List<Bar> IBarService<Bar>.GetBarsByName(string name)
+        List<Bar> IBarService.GetBarsByType(string type)
         {
-            return _barServiceImplementation.GetBarsByName(name);
+            return new List<Bar>();
         }
 
-        List<Bar> IBarService<Bar>.GetBarsByType(string type)
+        List<Bar> IBarService.GetBarsByLocation(string location)
         {
-            return _barServiceImplementation.GetBarsByType(type);
+            return new List<Bar>();
         }
 
-        List<Bar> IBarService<Bar>.GetBarsByLocation(string location)
+        List<Bar> IBarService.GetAllBars()
         {
-            return _barServiceImplementation.GetBarsByLocation(location);
+            return new List<Bar>();
         }
 
-        List<Bar> IBarService<Bar>.GetAllBars()
+        void IBarService.Save(string[] param)
         {
-            return _barServiceImplementation.GetAllBars();
+
         }
 
-        void IBarService<Bar>.Save(string[] param)
+        void IBarService.Update(int id, string[] param)
         {
-            _barServiceImplementation.Save(param);
+            
         }
 
-        void IBarService<Bar>.Update(int id, string[] param)
+        void IBarService.Delete(int id)
         {
-            _barServiceImplementation.Update(id, param);
-        }
 
-        void IBarService<Bar>.Delete(int id)
-        {
-            _barServiceImplementation.Delete(id);
         }
     }
 }

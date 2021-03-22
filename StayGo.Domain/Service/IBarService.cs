@@ -1,17 +1,18 @@
 using System.Collections.Generic;
+using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
-    public interface IBarService<T>
+    public interface IBarService
     {
-        internal T GetBarById(int id);
-        internal List<T> GetBarsByName(string name);
-        internal List<T> GetBarsByType(string type); 
-        internal List<T> GetBarsByLocation(string location); 
-        internal List<T> GetAllBars();
+        public Bar GetBarById(int id);
+        public List<Bar> GetBarsByName(string name);
+        public List<Bar> GetBarsByType(string type); 
+        public List<Bar> GetBarsByLocation(string location); 
+        public List<Bar> GetAllBars();
 
-        internal void Save(string[] param);
-        internal void Update(int id, string[] param);
-        internal void Delete(int id);
+        public void Save(string[] param);
+        public void Update(int id, string[] param);
+        public void Delete(int id);
     }
 }

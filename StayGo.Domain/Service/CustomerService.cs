@@ -3,38 +3,32 @@ using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
-    public class CustomerService : ICustomerService<Customer>
+    public class CustomerService : ICustomerService
     {
-        private readonly ICustomerService<Customer> _customerServiceImplementation;
 
-        public CustomerService(ICustomerService<Customer> customerServiceImplementation)
+        Customer ICustomerService.GetCustomerById(int id)
         {
-            _customerServiceImplementation = customerServiceImplementation;
+            return new Customer();
         }
 
-        Customer ICustomerService<Customer>.GetCustomerById(int id)
+        List<Customer> ICustomerService.GetAllCustomers()
         {
-            return _customerServiceImplementation.GetCustomerById(id);
+            return new List<Customer>();
         }
 
-        List<Customer> ICustomerService<Customer>.GetAllCustomers()
+        void ICustomerService.Save(string[] param)
         {
-            return _customerServiceImplementation.GetAllCustomers();
+
         }
 
-        void ICustomerService<Customer>.Save(string[] param)
+        void ICustomerService.Update(int id, string[] param)
         {
-            _customerServiceImplementation.Save(param);
+
         }
 
-        void ICustomerService<Customer>.Update(int id, string[] param)
+        void ICustomerService.Delete(int id)
         {
-            _customerServiceImplementation.Update(id, param);
-        }
 
-        void ICustomerService<Customer>.Delete(int id)
-        {
-            _customerServiceImplementation.Delete(id);
         }
     }
 }

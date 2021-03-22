@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
-    public interface ICustomerService<T>
+    public interface ICustomerService
     {
-        internal T GetCustomerById(int id);
-        internal List<T> GetAllCustomers();
+        public Customer GetCustomerById(int id);
+        public List<Customer> GetAllCustomers();
 
-        internal void Save(string[] param);
-        internal void Update(int id, string[] param);
-        internal void Delete(int id);
+        public void Save(string[] param);
+        public void Update(int id, string[] param);
+        public void Delete(int id);
     }
 }

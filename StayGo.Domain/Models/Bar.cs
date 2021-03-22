@@ -2,12 +2,12 @@ namespace StayGo.Domain.Models
 {
     public class Bar
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private string Address { get; set; }
-        private string Description { get; set; }
-        private string Type { get; set; } 
-        private int Rating { get; set; } 
-        private double AvgPayCheck { get; set; } 
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; } 
+        public byte Rating { get; set; } 
+        public double AvgPayCheck { get; set; } 
     }
 }
