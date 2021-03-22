@@ -50,8 +50,32 @@ namespace staygo_server.Controllers
             return CreatedAtAction(nameof(GetBars), new List<Bar>());
         }
 
+        [HttpGet]
+        public async Task<ActionResult<string>> GetBarCuisineType(int id, string barName)
+        {
+            return CreatedAtAction(nameof(GetBarCuisineType), new Bar().Type);
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<string>> GetBarLocation(int id, string barName)
+        {
+            return CreatedAtAction(nameof(GetBarLocation), new Bar().Address);
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<byte>> GetBarRating(int id, string barName)
+        {
+            return CreatedAtAction(nameof(GetBarRating), new Bar().Rating);
+        }
+        
+        [HttpGet]
+        public async Task<ActionResult<string>> GetBarAvgPaycheck(int id, string barName)
+        {
+            return CreatedAtAction(nameof(GetBarAvgPaycheck), new Bar().AvgPayCheck);
+        }
+        
         [HttpPost]
-        public async void UpdateBar(int id, string[] param)//
+        public async void UpdateBar(int id, string[] param)
         {
             return;
         }

@@ -13,7 +13,7 @@ namespace staygo_server.Controllers
     public class CustomerController : ControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<Customer>> GetCustomerById(string barLoc) // GeoCoordinates?
+        public async Task<ActionResult<Customer>> GetCustomerById(int id) 
         {
             //await
             return CreatedAtAction(nameof(GetCustomerById), new Customer());
@@ -26,7 +26,7 @@ namespace staygo_server.Controllers
         }
         
         [HttpPost]
-        public async void UpdateCustomer(int id, string[] param)//
+        public async void UpdateCustomer(int id, string[] param)
         {
             return;
         }
