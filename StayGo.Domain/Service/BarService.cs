@@ -5,42 +5,42 @@ namespace StayGo.Domain.Service
 {
     public class BarService : IBarService
     {
-        Bar IBarService.GetBarById(int id)
+        public Bar GetBarById(int id)
         {
             return new Bar();
         }
 
-        List<Bar> IBarService.GetBarsByName(string name)
+        public List<Bar> GetBarsByName(string name)
         {
             return new List<Bar>();
         }
 
-        List<Bar> IBarService.GetBarsByType(string type)
+        public List<Bar> GetBarsByType(string type)
         {
             return new List<Bar>();
         }
 
-        List<Bar> IBarService.GetBarsByLocation(string location)
+        public List<Bar> GetBarsByLocation(string location)
         {
             return new List<Bar>();
         }
 
-        List<Bar> IBarService.GetAllBars()
+        public List<Bar> GetAllBars()
         {
             return new List<Bar>();
         }
 
-        void IBarService.Save(string[] param)
+        public void Save(string[] param)
         {
 
         }
 
-        void IBarService.Update(int id, string[] param)
+        public void Update(int id, string[] param)
         {
             
         }
 
-        void IBarService.Delete(int id)
+        public void Delete(int id)
         {
 
         }
