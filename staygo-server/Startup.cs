@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace staygo_server
+    namespace staygo_server
 {
     public class Startup
     {
@@ -16,6 +17,12 @@ namespace staygo_server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var password = Environment
+                .GetEnvironmentVariable("DBPASSWORD");
+            var userId = Environment
+                .GetEnvironmentVariable("DBUSERID");
+            services.AddDbContext<DbTestContext>(x => x.UseSqlServer(
+                $"Data Source=localhost; Database=master;User Id={userId};Password={password}"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
