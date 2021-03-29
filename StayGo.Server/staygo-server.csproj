@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>staygo_server</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="StayGo.Server\Program.cs">
+        <Link>WebApplication\Program.cs</Link>
+      </Compile>
+      <Compile Update="StayGo.Server\Startup.cs">
+        <Link>WebApplication\Startup.cs</Link>
+      </Compile>
+      <Compile Update="StayGo.Server\Controllers\WeatherForecastController.cs">
+        <Link>WebApplication\Controllers\WeatherForecastController.cs</Link>
+      </Compile>
+      <Compile Update="StayGo.Server\WeatherForecast.cs">
+        <Link>WebApplication\WeatherForecast.cs</Link>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="StayGo.Server\Properties\launchSettings.json">
+        <Link>WebApplication\Properties\launchSettings.json</Link>
+      </Content>
+      <Content Update="StayGo.Server\appsettings.json">
+        <Link>WebApplication\appsettings.json</Link>
+      </Content>
+      <Content Update="StayGo.Server\appsettings.Development.json">
+        <Link>WebApplication\appsettings.Development.json</Link>
+      </Content>
+    </ItemGroup>
+
+</Project>
