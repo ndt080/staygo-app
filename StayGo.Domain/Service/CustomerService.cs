@@ -5,29 +5,30 @@ namespace StayGo.Domain.Service
 {
     public class CustomerService : ICustomerService
     {
-        public Customer GetCustomerById(int id)
+        public CustomerDto GetCustomerById(int id)
         {
-            return new Customer();
+            return new CustomerDto();
         }
 
-        public List<Customer> GetAllCustomers()
+        public List<CustomerDto> GetAllCustomers()
         {
-            return new List<Customer>();
+            return new List<CustomerDto>();
         }
 
-        public void Save(string[] param)
+        public void AddCustomer(CustomerDto obj)
         {
-
+            throw new System.NotImplementedException();
         }
 
-        public void Update(int id, string[] param)
-        {
-
-        }
-
-        public void Delete(int id)
+        public void UpdateCustomer(CustomerDto obj)
         {
 
         }
+
+        public void DeleteCustomer(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+        
     }
 }
