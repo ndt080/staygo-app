@@ -23,6 +23,8 @@ namespace StayGo.Domain.Service
 
         public Task<List<Bar>> GetBarsByLocation(string location)
         {
+            
+            
             throw new System.NotImplementedException();
         }
 
