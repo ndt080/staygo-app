@@ -1,15 +1,16 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
     public interface ICustomerService
     {
-        public CustomerDto GetCustomerById(int id);
-        public List<CustomerDto> GetAllCustomers();
+        public Task<Customer> GetCustomerById(int id);
+        public Task<List<Customer>> GetAllCustomers();
 
-        public void AddCustomer(CustomerDto obj);
-        public void UpdateCustomer(CustomerDto obj);
-        public void DeleteCustomer(int id);
+        public Task AddCustomer(Customer obj);
+        public Task UpdateCustomer(Customer obj);
+        public Task DeleteCustomer(int id);
     }
 }

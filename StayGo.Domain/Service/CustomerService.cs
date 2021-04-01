@@ -1,34 +1,39 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
     public class CustomerService : ICustomerService
     {
-        public CustomerDto GetCustomerById(int id)
+        public async Task<Customer> GetCustomerById(int id)
         {
-            return new CustomerDto();
+            var output = new Customer()
+            {
+                Id = -1, Name = "Test", DateBirth = new DateTime(2002, 7, 4, 6, 0, 0)
+            };
+            return output;
         }
 
-        public List<CustomerDto> GetAllCustomers()
-        {
-            return new List<CustomerDto>();
-        }
-
-        public void AddCustomer(CustomerDto obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateCustomer(CustomerDto obj)
-        {
-
-        }
-
-        public void DeleteCustomer(int id)
+        public Task<List<Customer>> GetAllCustomers()
         {
             throw new System.NotImplementedException();
         }
-        
+
+        public Task AddCustomer(Customer customer)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateCustomer(Customer customer)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteCustomer(int id)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

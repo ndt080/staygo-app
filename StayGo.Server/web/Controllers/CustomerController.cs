@@ -1,48 +1,99 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using StayGo.Domain.Models;
+using StayGo.Domain.Service;
+using staygo_server.Models;
 
 namespace staygo_server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpGet]
-        [Route("CustomerByID/{id:int}")]
-        public async Task<ActionResult<Object>> GetCustomerById(int id) 
+        private readonly ICustomerService _customerService;
+
+        public CustomerController(ICustomerService customerService)
         {
-            //await
-            return CreatedAtAction(nameof(GetCustomerById), new Object());
+            _customerService = customerService;
         }
 
         [HttpGet]
-        [Route("Customers")]
-        public async Task<ActionResult<List<Object>>> GetAllCustomers()
+        [Route("GetByID")]
+        public async Task<IActionResult> GetCustomerById(int id)
         {
-            return CreatedAtAction(nameof(GetAllCustomers), new List<Object>());
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _customerService.GetCustomerById(id);
+
+            return Ok(output);
         }
-        
-        [HttpPost]
-        [Route("upd/{id:int}")]
-        public async void UpdateCustomer(int id, string[] param)
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<IActionResult> GetAllCustomers()
         {
-            return;
+            var output = await _customerService.GetAllCustomers();
+            if (output[0] == null)
+                NotFound();
+            return Ok(output);
         }
 
         [HttpPut]
-        [Route("Save")]
-        public async void SaveCustomer(string[] param)
+        [Route("Update")]
+        public async Task<IActionResult> UpdateCustomer(CustomerDto obj)
         {
-            return;
+            if (!ModelState.IsValid || obj == null || obj.Id < 0)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var input = new Customer
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                DateBirth = obj.DateBirth
+            };
+
+            await _customerService.UpdateCustomer(input);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("Add")]
+        public async Task<IActionResult> AddCustomer(CustomerDto obj)
+        {
+            if (!ModelState.IsValid || obj == null || obj.Id < 0)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var input = new Customer
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                DateBirth = obj.DateBirth
+            };
+
+            await _customerService.AddCustomer(input);
+            return Ok();
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public async void DeleteCustomer(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
-            return;
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _customerService.DeleteCustomer(id);
+            return Ok();
         }
     }
 }

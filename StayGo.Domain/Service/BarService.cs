@@ -1,48 +1,49 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
     public class BarService : IBarService
     {
-        public BarDto GetBarById(int id)
+        public Task<Bar> GetBarById(int id)
         {
-            return new BarDto();
+            throw new System.NotImplementedException();
         }
 
-        public List<BarDto> GetBarsByName(string name)
+        public Task<List<Bar>> GetBarsByName(string name)
         {
-            return new List<BarDto>();
+            throw new System.NotImplementedException();
         }
 
-        public List<BarDto> GetBarsByType(string type)
+        public Task<List<Bar>> GetBarsByType(string type)
         {
-            return new List<BarDto>();
+            throw new System.NotImplementedException();
         }
 
-        public List<BarDto> GetBarsByLocation(string location)
+        public Task<List<Bar>> GetBarsByLocation(string location)
         {
-            return new List<BarDto>();
+            throw new System.NotImplementedException();
         }
 
-        public List<BarDto> GetAllBars()
+        public Task<List<Bar>> GetAllBars()
         {
-            return new List<BarDto>();
+            throw new System.NotImplementedException();
         }
 
-        public void AddBar(BarDto obj)
+        public Task AddBar(Bar obj)
         {
-
+            throw new System.NotImplementedException();
         }
 
-        public void UpdateBar(BarDto obj)
+        public Task UpdateBar(Bar obj)
         {
-            
+            throw new System.NotImplementedException();
         }
 
-        public void DeleteBar(int id)
+        public Task DeleteBar(int id)
         {
-
+            throw new System.NotImplementedException();
         }
     }
 }
