@@ -6,7 +6,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\StayGo.Domain\StayGo.Domain.csproj" />
     </ItemGroup>
 
 </Project>

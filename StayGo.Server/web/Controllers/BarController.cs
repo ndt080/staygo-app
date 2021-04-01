@@ -1,102 +1,166 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using StayGo.Domain.Models;
+using StayGo.Domain.Service;
+using staygo_server.Models;
 
 namespace staygo_server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BarController : ControllerBase
     {
-        [HttpGet]
-        [Route("ById/{id:int}")]
-        public async Task<ActionResult<Object>> GetBarById(int id) 
-        {
-            //await
-            return CreatedAtAction(nameof(GetBarById), new Object());
-        }
-        [HttpGet]
-        [Route("ByName/{barName}")]
-        public async Task<ActionResult<List<Object>>> GetBarsName(string barName)
-        {
-            
-            //await
-            //тут насколько я понимаю должно быть подключение к бд
-            //и получение списка который и вернем но это дело пока не реализовано
+        private readonly IBarService _barService;
 
-            return CreatedAtAction(nameof(GetBarsName), new List<Object>());
+        public BarController(IBarService barService)
+        {
+            _barService = barService;
         }
 
         [HttpGet]
-        [Route("ByLocation/{barLoc}")]
-        public async Task<ActionResult<List<Object>>> GetBarsLoc(string barLoc) // GeoCoordinates?
+        [Route("GetById")]
+        public async Task<IActionResult> GetBarById(int id)
         {
-            //await
-            return CreatedAtAction(nameof(GetBarsLoc), new List<Object>());
-        }
-        [HttpGet]
-        [Route("ByType/{barCuisineType}")]
-        public async Task<ActionResult<List<Object>>> GetBarsType(string barCuisineType) 
-        {
-            //await 
-            return CreatedAtAction(nameof(GetBarsType), new List<Object>());
-        }
-        [HttpGet]
-        [Route("All")]
-        public async Task<ActionResult<List<Object>>> GetBars() 
-        {
-            //await 
-            return CreatedAtAction(nameof(GetBars), new List<Object>());
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+            if (output == null)
+            {
+                NotFound();
+            }
+
+            return Ok(output);
         }
 
         [HttpGet]
-        [Route("Cuisine/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarCuisineType(int id, string barName)
+        [Route("GetByName")]
+        public async Task<IActionResult> GetBarsName(string barName)
         {
-            return CreatedAtAction(nameof(GetBarCuisineType), new string("Cuisine"));
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByName(barName);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
-        
+
         [HttpGet]
-        [Route("Location/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarLocation(int id, string barName)
+        [Route("GetByLocation")]
+        public async Task<IActionResult> GetBarsLoc(string barLoc) // GeoCoordinates?
         {
-            return CreatedAtAction(nameof(GetBarLocation), new string("Address"));
+            if (barLoc == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByLocation(barLoc);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
-        
+
         [HttpGet]
-        [Route("Rate/{id:int}/{barName}")]
-        public async Task<ActionResult<byte>> GetBarRating(int id, string barName)
+        [Route("GetByType")]
+        public async Task<IActionResult> GetBarsType(string barCuisineType)
         {
-            return CreatedAtAction(nameof(GetBarRating), 5);
+            if (barCuisineType == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByType(barCuisineType);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
-        
+
         [HttpGet]
-        [Route("AvgPaycheck/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarAvgPaycheck(int id, string barName)
+        [Route("GetAll")]
+        public async Task<IActionResult> GetBars()
         {
-            return CreatedAtAction(nameof(GetBarAvgPaycheck), barName);
+            var output = await _barService.GetAllBars();
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
-        
+
         [HttpPost]
-        [Route("upd/{id:int}")]
-        public async void UpdateBar(int id, string[] param)
+        [Route("Update")]
+        public async Task<IActionResult> UpdateBar(BarDto obj)
         {
-            return;
+            if (!ModelState.IsValid || obj == null || obj.Id < 0)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var input = new Bar
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                Address = obj.Address,
+                Description = obj.Description,
+                Type = obj.Type,
+                Rating = obj.Rating,
+                AvgPayCheck = obj.AvgPayCheck
+            };
+
+            await _barService.AddBar(input);
+            return Ok();
         }
 
         [HttpPut]
-        [Route("Save")]
-        public async void SaveBar(string[] param)
+        [Route("Add")]
+        public async Task<IActionResult> AddBar(BarDto obj)
         {
-            return;
+            if (!ModelState.IsValid || obj == null || obj.Id < 0)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var input = new Bar
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                Address = obj.Address,
+                Description = obj.Description,
+                Type = obj.Type,
+                Rating = obj.Rating,
+                AvgPayCheck = obj.AvgPayCheck
+            };
+
+            await _barService.AddBar(input);
+            return Ok();
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public async void DeleteBar(int id)
+        public async Task<IActionResult> DeleteBar(int id)
         {
-            return;
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _barService.DeleteBar(id);
+            return Ok();
         }
     }
 }
