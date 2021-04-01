@@ -2,101 +2,269 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BarController : ControllerBase
     {
-        [HttpGet]
-        [Route("ById/{id:int}")]
-        public async Task<ActionResult<Object>> GetBarById(int id) 
-        {
-            //await
-            return CreatedAtAction(nameof(GetBarById), new Object());
-        }
-        [HttpGet]
-        [Route("ByName/{barName}")]
-        public async Task<ActionResult<List<Object>>> GetBarsName(string barName)
-        {
-            
-            //await
-            //тут насколько я понимаю должно быть подключение к бд
-            //и получение списка который и вернем но это дело пока не реализовано
+        private readonly ICBarService _barService;
 
-            return CreatedAtAction(nameof(GetBarsName), new List<Object>());
+        public BarController(ICBarService barService)
+        {
+            _barService = barService;
         }
 
         [HttpGet]
-        [Route("ByLocation/{barLoc}")]
-        public async Task<ActionResult<List<Object>>> GetBarsLoc(string barLoc) // GeoCoordinates?
+        [Route("ById")]
+        public async Task<IActionResult> GetBarById(int id)
         {
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+            if (output == null)
+            {
+                NotFound();
+            }
+
             //await
-            return CreatedAtAction(nameof(GetBarsLoc), new List<Object>());
+            return Ok(output);
         }
+
         [HttpGet]
-        [Route("ByType/{barCuisineType}")]
-        public async Task<ActionResult<List<Object>>> GetBarsType(string barCuisineType) 
+        [Route("ByName")]
+        public async Task<IActionResult> GetBarsName(string barName)
         {
-            //await 
-            return CreatedAtAction(nameof(GetBarsType), new List<Object>());
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByName(barName);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
+
+        [HttpGet]
+        [Route("ByLocation")]
+        public async Task<IActionResult> GetBarsLoc(string barLoc) // GeoCoordinates?
+        {
+            if (barLoc == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByLocation(barLoc);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
+        }
+
+        [HttpGet]
+        [Route("ByType")]
+        public async Task<IActionResult> GetBarsType(string barCuisineType)
+        {
+            if (barCuisineType == null)
+            {
+                return BadRequest();
+            }
+
+            var output = await _barService.GetBarsByType(barCuisineType);
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
+        }
+
         [HttpGet]
         [Route("All")]
-        public async Task<ActionResult<List<Object>>> GetBars() 
+        public async Task<IActionResult> GetBars()
         {
-            //await 
-            return CreatedAtAction(nameof(GetBars), new List<Object>());
+            var output = await _barService.GetAllBars();
+            if (output == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(output);
         }
 
         [HttpGet]
-        [Route("Cuisine/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarCuisineType(int id, string barName)
+        [Route("Cuisine")]
+        public async Task<IActionResult> GetBarCuisineType(int id, string barName)
         {
-            return CreatedAtAction(nameof(GetBarCuisineType), new string("Cuisine"));
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+
+            if (output == null || output.Name != barName)
+            {
+                return NotFound();
+            }
+
+            return Ok(output.Type);
         }
-        
+
         [HttpGet]
-        [Route("Location/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarLocation(int id, string barName)
+        [Route("Location")]
+        public async Task<IActionResult> GetBarLocation(int id, string barName)
         {
-            return CreatedAtAction(nameof(GetBarLocation), new string("Address"));
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+
+            if (output == null || output.Name != barName)
+            {
+                return NotFound();
+            }
+
+            return Ok(output.Address);
         }
-        
+
         [HttpGet]
-        [Route("Rate/{id:int}/{barName}")]
-        public async Task<ActionResult<byte>> GetBarRating(int id, string barName)
+        [Route("Rate")]
+        public async Task<IActionResult> GetBarRating(int id, string barName)
         {
-            return CreatedAtAction(nameof(GetBarRating), 5);
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+
+            if (output == null || output.Name != barName)
+            {
+                return NotFound();
+            }
+
+            return Ok(output.Rating);
         }
-        
+
         [HttpGet]
-        [Route("AvgPaycheck/{id:int}/{barName}")]
-        public async Task<ActionResult<string>> GetBarAvgPaycheck(int id, string barName)
+        [Route("AvgPaycheck")]
+        public async Task<IActionResult> GetBarAvgPaycheck(int id, string barName)
         {
-            return CreatedAtAction(nameof(GetBarAvgPaycheck), barName);
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+
+            if (output == null || output.Name != barName)
+            {
+                return NotFound();
+            }
+
+            return Ok(output.AvgPayCheck);
         }
-        
+
+        [HttpGet]
+        [Route("Description")]
+        public async Task<IActionResult> GetBarDescription(int id, string barName)
+        {
+            if (barName == null)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarById(id);
+
+            if (output == null || output.Name != barName)
+            {
+                return NotFound();
+            }
+
+            return Ok(output.Description);
+        }
+
         [HttpPost]
-        [Route("upd/{id:int}")]
-        public async void UpdateBar(int id, string[] param)
+        [Route("upd")]
+        public async Task<IActionResult> UpdateBar(int id, string[] param)
         {
-            return;
+            if (param.Length != 7)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _barService.Save(param);
+            return Ok();
         }
 
         [HttpPut]
         [Route("Save")]
-        public async void SaveBar(string[] param)
+        public async Task<IActionResult> SaveBar(string[] param)
         {
-            return;
+            if (param.Length != 7)
+            {
+                return BadRequest();
+            }
+
+            await _barService.Save(param);
+            return Ok();
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public async void DeleteBar(int id)
+        public async Task<IActionResult> DeleteBar(int id)
         {
-            return;
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _barService.Delete(id);
+            return Ok();
         }
     }
 }

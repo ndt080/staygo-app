@@ -2,47 +2,88 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Models;
+using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        [HttpGet]
-        [Route("CustomerByID/{id:int}")]
-        public async Task<ActionResult<Object>> GetCustomerById(int id) 
+        private readonly ICCustomerService _customerService;
+
+        public CustomerController(ICCustomerService customerService)
         {
-            //await
-            return CreatedAtAction(nameof(GetCustomerById), new Object());
+            _customerService = customerService;
+        }
+
+        [HttpGet]
+        [Route("CustomerByID")]
+        public async Task<IActionResult> GetCustomerById(int id)
+        {
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _customerService.GetCustomerById(id);
+
+            return Ok(output);
         }
 
         [HttpGet]
         [Route("Customers")]
-        public async Task<ActionResult<List<Object>>> GetAllCustomers()
+        public async Task<IActionResult> GetAllCustomers()
         {
-            return CreatedAtAction(nameof(GetAllCustomers), new List<Object>());
+            var output = await _customerService.GetAllCustomers();
+            if (output[0] == null)
+                NotFound();
+            return Ok(output);
         }
-        
+
         [HttpPost]
-        [Route("upd/{id:int}")]
-        public async void UpdateCustomer(int id, string[] param)
+        [Route("upd")]
+        public async Task<IActionResult> UpdateCustomer(int id, string[] param)
         {
-            return;
+            if (param.Length != 3)
+            {
+                return BadRequest();
+            }
+
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _customerService.Update(id, param);
+            return Ok();
         }
 
         [HttpPut]
         [Route("Save")]
-        public async void SaveCustomer(string[] param)
+        public async Task<IActionResult> SaveCustomer(string[] param)
         {
-            return;
+            if (param.Length != 3)
+            {
+                return BadRequest();
+            }
+
+            await _customerService.Save(param);
+            return Ok();
         }
 
         [HttpDelete]
         [Route("Delete")]
-        public async void DeleteCustomer(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
-            return;
+            if (id < 0)
+            {
+                return NotFound();
+            }
+
+            await _customerService.Delete(id);
+            return Ok();
         }
     }
 }
