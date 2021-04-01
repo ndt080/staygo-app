@@ -5,11 +5,11 @@ namespace StayGo.Domain.Service
 {
     public interface ICustomerService
     {
-        public Customer GetCustomerById(int id);
-        public List<Customer> GetAllCustomers();
+        public CustomerDto GetCustomerById(int id);
+        public List<CustomerDto> GetAllCustomers();
 
-        public void Save(string[] param);
-        public void Update(int id, string[] param);
-        public void Delete(int id);
+        public void AddCustomer(CustomerDto obj);
+        public void UpdateCustomer(CustomerDto obj);
+        public void DeleteCustomer(int id);
     }
 }
