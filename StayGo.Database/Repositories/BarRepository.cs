@@ -9,9 +9,7 @@ namespace StayGo.Database.Repositories
 {
     public class BarRepository : IBarRepository
     {
-        private BaseContext _db;
-        private bool _disposed = false;
-
+        private readonly BaseContext _db;
         public BarRepository(BaseContext db)
         {
             _db = db;
@@ -30,6 +28,7 @@ namespace StayGo.Database.Repositories
         public void Create(Bar item)
         {
             _db.Bars.Add(item);
+            Save();
         }
 
         public void Update(Bar item)
@@ -46,25 +45,6 @@ namespace StayGo.Database.Repositories
         public void Save()
         {
             _db.SaveChanges();
-        }
-
-
-        public virtual void Dispose(bool disposing)
-        {
-            if(!_disposed)
-            {
-                if(disposing)
-                {
-                    _db.Dispose();
-                }
-            }
-            _disposed = true;
-        }
- 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

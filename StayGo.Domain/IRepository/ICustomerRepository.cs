@@ -4,7 +4,7 @@ using StayGo.Domain.Models;
 
 namespace StayGo.Domain.IRepository
 {
-    public interface ICustomerRepository : IDisposable
+    public interface ICustomerRepository
     {
         IEnumerable<Customer> GetCustomerList();
         Customer GetCustomer(int id);

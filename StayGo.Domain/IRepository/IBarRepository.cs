@@ -4,7 +4,7 @@ using StayGo.Domain.Models;
 
 namespace StayGo.Domain.IRepository
 {
-    public interface IBarRepository : IDisposable
+    public interface IBarRepository
     {
         IEnumerable<Bar> GetBarList();
         Bar GetBar(int id);

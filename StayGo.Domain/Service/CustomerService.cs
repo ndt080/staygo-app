@@ -10,6 +10,11 @@ namespace StayGo.Domain.Service
     {
         private ICustomerRepository _customerRepository;
 
+        public CustomerService(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
         public async Task<Customer> GetCustomerById(int id)
         {
             var output = new Customer()
@@ -26,6 +31,7 @@ namespace StayGo.Domain.Service
 
         public Task AddCustomer(Customer customer)
         {
+            _customerRepository.Create(customer);
             return Task.CompletedTask;
         }
 

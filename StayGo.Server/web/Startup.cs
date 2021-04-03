@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StayGo.Database.Context;
+using StayGo.Database.Repositories;
+using StayGo.Domain.IRepository;
 using StayGo.Domain.Service;
 
 namespace staygo_server
@@ -20,8 +22,7 @@ namespace staygo_server
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BaseContext>(
@@ -33,6 +34,8 @@ namespace staygo_server
             services.AddControllers();
             services.AddScoped<IBarService, BarService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IBarRepository, BarRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "StayGo.Domain", Version = "v1"});

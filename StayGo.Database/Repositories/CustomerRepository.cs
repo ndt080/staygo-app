@@ -10,8 +10,6 @@ namespace StayGo.Database.Repositories
     public class CustomerRepository: ICustomerRepository
     {
         private BaseContext _db;
-        private bool _disposed = false;
-
         public CustomerRepository(BaseContext db)
         {
             _db = db;
@@ -48,24 +46,6 @@ namespace StayGo.Database.Repositories
         public void Save()
         {
             _db.SaveChanges();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if(!_disposed)
-            {
-                if(disposing)
-                {
-                    _db.Dispose();
-                }
-            }
-            _disposed = true;
-        }
- 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }
