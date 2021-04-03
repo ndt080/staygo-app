@@ -1,9 +1,13 @@
+using System;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using StayGo.Database.Context;
 using StayGo.Domain.Service;
 
 namespace staygo_server
@@ -20,6 +24,12 @@ namespace staygo_server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BaseContext>(
+                x => x.UseSqlServer(
+                    Configuration.GetConnectionString("AzureSQLConnection"),
+                    x => x.MigrationsAssembly("../../StayGo.Database"))
+            );
+
             services.AddControllers();
             services.AddScoped<IBarService, BarService>();
             services.AddScoped<ICustomerService, CustomerService>();
