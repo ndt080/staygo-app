@@ -10,7 +10,7 @@ using StayGo.Database.Context;
 namespace StayGo.Database.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20210403131730_init")]
+    [Migration("20210403151555_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
