@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using StayGo.Domain.Models;
 
-namespace StayGo.Database.Repositories
+namespace StayGo.Domain.IRepository
 {
-    interface ICustomerRepository : IDisposable
+    public interface ICustomerRepository : IDisposable
     {
         IEnumerable<Customer> GetCustomerList();
         Customer GetCustomer(int id);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using StayGo.Database.Context;
+using StayGo.Domain.IRepository;
 using StayGo.Domain.Models;
 
 namespace StayGo.Database.Repositories
@@ -29,6 +30,7 @@ namespace StayGo.Database.Repositories
         public void Create(Customer item)
         {
             _db.Customers.Add(item);
+            Save();
         }
 
         public void Update(Customer item)
@@ -48,7 +50,7 @@ namespace StayGo.Database.Repositories
             _db.SaveChanges();
         }
 
-        public virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if(!_disposed)
             {

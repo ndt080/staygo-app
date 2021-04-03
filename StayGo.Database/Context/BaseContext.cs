@@ -5,10 +5,11 @@ namespace StayGo.Database.Context
 {
     public class BaseContext: DbContext
     {
-        public BaseContext(DbContextOptions<BaseContext> options): base(options){}
+        public BaseContext(DbContextOptions<BaseContext> options) : base(options) { }
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public BaseContext(){}
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Bar>().ToTable("Bar");

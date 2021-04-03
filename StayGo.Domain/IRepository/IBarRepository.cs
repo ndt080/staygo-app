@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using StayGo.Domain.Models;
 
-namespace StayGo.Database.Repositories
+namespace StayGo.Domain.IRepository
 {
-    interface IBarRepository : IDisposable
+    public interface IBarRepository : IDisposable
     {
         IEnumerable<Bar> GetBarList();
         Bar GetBar(int id);

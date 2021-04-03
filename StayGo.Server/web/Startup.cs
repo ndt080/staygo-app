@@ -27,7 +27,7 @@ namespace staygo_server
             services.AddDbContext<BaseContext>(
                 x => x.UseSqlServer(
                     Configuration.GetConnectionString("AzureSQLConnection"),
-                    x => x.MigrationsAssembly("../../StayGo.Database"))
+                    y => y.MigrationsAssembly("../../StayGo.Database"))
             );
 
             services.AddControllers();

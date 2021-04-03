@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using StayGo.Database.Context;
+using StayGo.Domain.IRepository;
 using StayGo.Domain.Models;
 
 namespace StayGo.Database.Repositories
