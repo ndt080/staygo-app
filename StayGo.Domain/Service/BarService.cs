@@ -1,49 +1,60 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StayGo.Domain.IRepository;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
     public class BarService : IBarService
     {
+        private readonly IBarRepository _barRepository;
+
+        public BarService(IBarRepository barRepository)
+        {
+            _barRepository = barRepository;
+        }
+
         public Task<Bar> GetBarById(int id)
         {
-            throw new System.NotImplementedException();
+            return Task.Run(() => _barRepository.GetBar(id));
+        }
+        
+        public Task<IEnumerable<Bar>> GetAllBars()
+        {
+            return Task.Run(() => _barRepository.GetAllBars());
         }
 
-        public Task<List<Bar>> GetBarsByName(string name)
+        public Task<IEnumerable<Bar>> GetBarsByName(string name)
         {
-            throw new System.NotImplementedException();
+            return Task.Run(() => _barRepository.GetAllBars());
         }
 
-        public Task<List<Bar>> GetBarsByType(string type)
+        public Task<IEnumerable<Bar>> GetBarsByType(string type)
         {
-            throw new System.NotImplementedException();
+            return Task.Run(() => _barRepository.GetBarsByType(type));
         }
 
-        public Task<List<Bar>> GetBarsByLocation(string location)
+        public Task<IEnumerable<Bar>> GetBarsByLocation(string location)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<List<Bar>> GetAllBars()
-        {
-            throw new System.NotImplementedException();
+            return Task.Run(() => _barRepository.GetBarsByType(location));
         }
 
         public Task AddBar(Bar obj)
         {
-            throw new System.NotImplementedException();
+            _barRepository.Create(obj);
+            return Task.CompletedTask;
         }
 
         public Task UpdateBar(Bar obj)
         {
-            throw new System.NotImplementedException();
+            _barRepository.Update(obj);
+            return Task.CompletedTask;
         }
 
         public Task DeleteBar(int id)
         {
-            throw new System.NotImplementedException();
+            _barRepository.Delete(id);
+            return Task.CompletedTask;
         }
     }
 }

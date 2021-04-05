@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using StayGo.Database.Context;
 using StayGo.Domain.IRepository;
@@ -9,7 +10,7 @@ namespace StayGo.Database.Repositories
 {
     public class CustomerRepository: ICustomerRepository
     {
-        private BaseContext _db;
+        private readonly BaseContext _db;
         public CustomerRepository(BaseContext db)
         {
             _db = db;
@@ -33,17 +34,23 @@ namespace StayGo.Database.Repositories
 
         public void Update(Customer item)
         {
-            _db.Entry(item).State = EntityState.Modified;
+            _db.Entry(item).State = item.Id == 0 ?
+                EntityState.Added :
+                EntityState.Modified;
+            Save();
         }
 
         public void Delete(int id)
         {
             Customer customer = _db.Customers.Find(id);
             if (customer != null)
+            {
                 _db.Customers.Remove(customer);
+                Save();   
+            }
         }
-        
-        public void Save()
+
+        private void Save()
         {
             _db.SaveChanges();
         }
