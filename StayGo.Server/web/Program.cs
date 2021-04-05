@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using staygo_server;
 
-namespace WebApplication
+namespace staygo_server
 {
     public class Program
     {

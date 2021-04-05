@@ -1,19 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StayGo.Domain.IRepository;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.Service
 {
     public class CustomerService : ICustomerService
     {
+        private ICustomerRepository _customerRepository;
+
+        public CustomerService(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
         public async Task<Customer> GetCustomerById(int id)
         {
             var output = new Customer()
             {
                 Id = -1, Name = "Test", DateBirth = new DateTime(2002, 7, 4, 6, 0, 0)
             };
-            return output;
+            return await Task.Run(() => output);
         }
 
         public Task<List<Customer>> GetAllCustomers()
@@ -23,6 +31,7 @@ namespace StayGo.Domain.Service
 
         public Task AddCustomer(Customer customer)
         {
+            _customerRepository.Create(customer);
             return Task.CompletedTask;
         }
 
