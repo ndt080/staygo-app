@@ -8,7 +8,7 @@ namespace StayGo.Domain.Service
 {
     public class CustomerService : ICustomerService
     {
-        private ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
         public CustomerService(ICustomerRepository customerRepository)
         {
@@ -17,16 +17,12 @@ namespace StayGo.Domain.Service
 
         public async Task<Customer> GetCustomerById(int id)
         {
-            var output = new Customer()
-            {
-                Id = -1, Name = "Test", DateBirth = new DateTime(2002, 7, 4, 6, 0, 0)
-            };
-            return await Task.Run(() => output);
+            return await Task.Run(() => _customerRepository.GetCustomer(id));
         }
 
-        public Task<List<Customer>> GetAllCustomers()
+        public Task<IEnumerable<Customer>> GetAllCustomers()
         {
-            throw new System.NotImplementedException();
+            return Task.Run(() => _customerRepository.GetCustomerList());
         }
 
         public Task AddCustomer(Customer customer)
@@ -37,11 +33,13 @@ namespace StayGo.Domain.Service
 
         public Task UpdateCustomer(Customer customer)
         {
+            _customerRepository.Update(customer);
             return Task.CompletedTask;
         }
 
         public Task DeleteCustomer(int id)
         {
+            _customerRepository.Delete(id);
             return Task.CompletedTask;
         }
     }

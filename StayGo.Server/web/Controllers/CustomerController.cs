@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using StayGo.Domain.Models;
 using StayGo.Domain.Service;
@@ -25,11 +24,9 @@ namespace staygo_server.Controllers
         {
             if (id < 0)
             {
-                return NotFound();
+                return BadRequest();
             }
-
             var output = await _customerService.GetCustomerById(id);
-
             return Ok(output);
         }
 
@@ -38,7 +35,7 @@ namespace staygo_server.Controllers
         public async Task<IActionResult> GetAllCustomers()
         {
             var output = await _customerService.GetAllCustomers();
-            if (output[0] == null)
+            if (output == null)
                 NotFound();
             return Ok(output);
         }
@@ -89,9 +86,8 @@ namespace staygo_server.Controllers
         {
             if (id < 0)
             {
-                return NotFound();
+                return BadRequest();
             }
-
             await _customerService.DeleteCustomer(id);
             return Ok();
         }
