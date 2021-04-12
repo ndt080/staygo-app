@@ -9,7 +9,7 @@ struct SearchAndFilterView: View {
                 }
                 .padding()
                 .background(Color("LightGrayColor"))
-                .cornerRadius(8.0)
+                .cornerRadius(10.0)
                 
                 
                 Image(uiImage: #imageLiteral(resourceName: "filter"))
