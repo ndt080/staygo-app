@@ -8,15 +8,16 @@ struct BigCardBarView: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 8){
-                Image(uiImage: image)
-                    .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                    .shadow(radius: 7)
+                
+                    
                 Spacer()
+                VStack{
                 HStack(){
                     Text(bar.name)
                         .fontWeight(.medium)
                         .foregroundColor(.black)
                     }
+               
                     
                 
                 HStack(spacing: 2) {
@@ -41,12 +42,7 @@ struct BigCardBarView: View {
 
                     }
                     Button(action:{
-                        if(isLiked){
-                            isLiked=false
-                        }
-                        else{
-                            isLiked=true
-                        }
+                       isLiked = !isLiked
                     })
                     {
                         if(isLiked){
@@ -61,11 +57,19 @@ struct BigCardBarView: View {
                         }
                     }
                 }
+                }
+                .frame(width: 189, height: 104)
+                .background(Color.white.opacity(0.87))
+                .clipShape(RoundedRectangle(cornerRadius: 15.0))
             }
-            .frame(width: 110)
+            .frame(width: 209, height: 270)
             .padding()
-            .background(Color("LightGrayColor"))
-            .cornerRadius(20.0)
+            .background(
+                Image(uiImage: image)
+                    .resizable()
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+            .shadow(radius: 7)
         }
         .padding(.trailing)
     }

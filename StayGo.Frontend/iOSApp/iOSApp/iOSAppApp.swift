@@ -1,10 +1,3 @@
-//
-//  iOSAppApp.swift
-//  iOSApp
-//
-//  Created by Haloperidol on 4.04.21.
-//
-
 import SwiftUI
 
 @main
@@ -13,5 +6,11 @@ struct iOSAppApp: App {
         WindowGroup {
             ContentView()
         }
+    }
+}
+
+struct iOSAppApp_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
