@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using staygo_server;
 
@@ -11,8 +12,13 @@ namespace staygo_server
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    var config = new ConfigurationBuilder().AddCommandLine(args).Build();
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseConfiguration(config);
+                });
     }
 }
