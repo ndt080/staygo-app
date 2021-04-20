@@ -19,6 +19,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release StayGo.Server --no-restore
+      run: cd StayGo.Server/web/ && dotnet build --configuration Release StayGo.Server --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
