@@ -1,7 +1,7 @@
 import Foundation
 
-class Bar{
-    var ID : Int
+struct Bar : Decodable, Identifiable{
+    let id : Int
     var name : String
     var address : String
     var description : String
@@ -9,7 +9,7 @@ class Bar{
     var rate : Int
     var avgCheck : Double
     init (){
-        self.ID = 0
+        self.id = 0
         self.address = ""
         self.type = ""
         self.name = "Bar"

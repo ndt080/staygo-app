@@ -9,8 +9,19 @@ import SwiftUI
 
 struct BarView: View {
     @State var bar : Bar
+    @State var netwManager = NetworkManager()
+    
     var body: some View {
-        Text("Some bar there")
+        NavigationView{
+            List(
+                netwManager.bars,
+                id: \.id
+            ){
+                Text($0.name)
+            }
+            .navigationBarTitle(Text("Bars"), displayMode: .inline)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
