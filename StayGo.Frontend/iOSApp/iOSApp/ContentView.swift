@@ -2,16 +2,12 @@ import SwiftUI
 import SafariServices
 
 struct ContentView: View {
-    
-    
     @State private var search: String = ""
     @State private var showSafari = false
     @State private var showSomeBarView = false
-    
     private var _bar : Bar = Bar.init()
     
     var body: some View {
-        
         ScrollView {
             VStack(alignment: .leading,spacing: 16) {
                 HomeNavBar()
@@ -49,7 +45,6 @@ struct ContentView: View {
                 SectionTabTitleView(title: "Places")
                 VStack{
                     Button(action: {
-                        
                         if(self.showSomeBarView == false){
                             self.showSomeBarView = true
                         }
@@ -57,7 +52,7 @@ struct ContentView: View {
                             self.showSomeBarView = false
                         }
                         
-                    } ){
+                    }){
                         SmallCardBarView(image: #imageLiteral(resourceName: "reco_1"),isLiked: false, bar: _bar)
                     }
                     .sheet(isPresented: $showSomeBarView) {
@@ -66,31 +61,6 @@ struct ContentView: View {
                 }
             }
             .padding()
-        }
-    }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            Group {
-                ContentView()
-                    .previewDevice("iPhone 12")
-            }
-        }
-    }
-    
-    
-    struct HomeNavBar: View {
-        var body: some View {
-            HStack{
-                Image(uiImage: #imageLiteral(resourceName: "menu")).onTapGesture {
-                    
-                }
-                Spacer()
-                
-                Image(systemName:"bell").onTapGesture {
-                }
-                
-            }
         }
     }
 }
@@ -117,5 +87,11 @@ struct SectionTabTitleView: View {
                 
             }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
