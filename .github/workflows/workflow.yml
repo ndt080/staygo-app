@@ -1,0 +1,24 @@
+name: dotnet package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '5.0.x' ]
+
+    steps:
+    - uses: actions/checkout@main
+    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Install dependencies
+      run: dotnet restore StayGo.Server/web/StayGo.Server.csproj 
+    - name: Build
+      run: dotnet build StayGo.Server/web/StayGo.Server.csproj -c Release /p:CI=true
+    - name: Test
+      run: dotnet test StayGo.Server/web/StayGo.Server.csproj --no-restore --verbosity normal

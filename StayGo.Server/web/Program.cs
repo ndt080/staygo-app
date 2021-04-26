@@ -5,7 +5,7 @@ using staygo_server;
 
 namespace staygo_server
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -16,9 +16,7 @@ namespace staygo_server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var config = new ConfigurationBuilder().AddCommandLine(args).Build();
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseConfiguration(config);
                 });
     }
 }
