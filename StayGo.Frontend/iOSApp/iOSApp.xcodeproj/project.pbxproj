@@ -14,10 +14,12 @@
 		3ED8A7F3261A35680029A6A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8A7F2261A35680029A6A3 /* ContentView.swift */; };
 		3ED8A7F5261A35690029A6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ED8A7F4261A35690029A6A3 /* Assets.xcassets */; };
 		3ED8A7F8261A35690029A6A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ED8A7F7261A35690029A6A3 /* Preview Assets.xcassets */; };
-		3ED8A824261B98E80029A6A3 /* SmallCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8A823261B98E80029A6A3 /* SmallCards.swift */; };
 		3ED8A827261B9A4A0029A6A3 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8A826261B9A4A0029A6A3 /* Search.swift */; };
 		3ED8A82A261B9CD90029A6A3 /* BigBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED8A829261B9CD90029A6A3 /* BigBarCard.swift */; };
 		C9675A80263731050093FCE8 /* HomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9675A7F263731050093FCE8 /* HomeNavBar.swift */; };
+		C9675A8B263735E80093FCE8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9675A8A263735E80093FCE8 /* HeaderView.swift */; };
+		C9675A93263737330093FCE8 /* RecommendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9675A92263737330093FCE8 /* RecommendView.swift */; };
+		C9675A9726373CEC0093FCE8 /* SmallBarCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9675A9626373CEC0093FCE8 /* SmallBarCardView.swift */; };
 		E43D3A432635894600B9842A /* NetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D3A422635894600B9842A /* NetManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +33,12 @@
 		3ED8A7F4261A35690029A6A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3ED8A7F7261A35690029A6A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3ED8A7F9261A35690029A6A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3ED8A823261B98E80029A6A3 /* SmallCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCards.swift; sourceTree = "<group>"; };
 		3ED8A826261B9A4A0029A6A3 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		3ED8A829261B9CD90029A6A3 /* BigBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBarCard.swift; sourceTree = "<group>"; };
-		C9675A7F263731050093FCE8 /* HomeNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavBar.swift; sourceTree = "<group>"; };
+		C9675A7F263731050093FCE8 /* HomeNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavBar.swift; path = Navigation/HomeNavBar.swift; sourceTree = "<group>"; };
+		C9675A8A263735E80093FCE8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		C9675A92263737330093FCE8 /* RecommendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendView.swift; sourceTree = "<group>"; };
+		C9675A9626373CEC0093FCE8 /* SmallBarCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallBarCardView.swift; sourceTree = "<group>"; };
 		E43D3A422635894600B9842A /* NetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,22 +103,24 @@
 		3ED8A822261B98200029A6A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C9675A7E263730EF0093FCE8 /* Navigation */,
-				3ED8A823261B98E80029A6A3 /* SmallCards.swift */,
+				C9675A8F263736C80093FCE8 /* Sections */,
 				3ED8A826261B9A4A0029A6A3 /* Search.swift */,
 				3ED8A829261B9CD90029A6A3 /* BigBarCard.swift */,
-				3E2397C4261FD5C7000880E2 /* BarView.swift */,
 				3E2397C7261FE193000880E2 /* SeeAllView.swift */,
+				C9675A9626373CEC0093FCE8 /* SmallBarCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C9675A7E263730EF0093FCE8 /* Navigation */ = {
+		C9675A8F263736C80093FCE8 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				3E2397C4261FD5C7000880E2 /* BarView.swift */,
+				C9675A8A263735E80093FCE8 /* HeaderView.swift */,
 				C9675A7F263731050093FCE8 /* HomeNavBar.swift */,
+				C9675A92263737330093FCE8 /* RecommendView.swift */,
 			);
-			path = Navigation;
+			name = Sections;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,9 +196,11 @@
 				3ED8A7F3261A35680029A6A3 /* ContentView.swift in Sources */,
 				C9675A80263731050093FCE8 /* HomeNavBar.swift in Sources */,
 				3E2397BE261FCD3C000880E2 /* Bar.swift in Sources */,
+				C9675A9726373CEC0093FCE8 /* SmallBarCardView.swift in Sources */,
 				3ED8A827261B9A4A0029A6A3 /* Search.swift in Sources */,
 				E43D3A432635894600B9842A /* NetManager.swift in Sources */,
-				3ED8A824261B98E80029A6A3 /* SmallCards.swift in Sources */,
+				C9675A93263737330093FCE8 /* RecommendView.swift in Sources */,
+				C9675A8B263735E80093FCE8 /* HeaderView.swift in Sources */,
 				3ED8A7F1261A35680029A6A3 /* iOSAppApp.swift in Sources */,
 				3E2397C8261FE193000880E2 /* SeeAllView.swift in Sources */,
 				3ED8A82A261B9CD90029A6A3 /* BigBarCard.swift in Sources */,

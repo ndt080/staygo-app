@@ -10,38 +10,9 @@ struct ContentView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading,spacing: 16) {
-                HomeNavBar()
-                
-                Text("Hello, Emma")
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("GrayColor"))
-                
-                Text("Where do you wanna go today?")
-                    .font(.title)
-                    .fontWeight(.bold)
-                
+                HeaderView()
                 SearchAndFilterView(search: $search)
-                SectionTabTitleView(title: "Recommended")
-                ScrollView(.horizontal){
-                    HStack{
-                        Button(action: {
-                            
-                            if(self.showSomeBarView == false){
-                                self.showSomeBarView = true
-                            }
-                            else {
-                                self.showSomeBarView = false
-                            }
-                            
-                        } ){
-                            BigCardBarView(image: #imageLiteral(resourceName: "reco_1"),isLiked: false, bar: _bar)
-                        }
-                        .sheet(isPresented: $showSomeBarView) {
-                            BarView(bar: _bar)
-                        }
-                    }
-                }
+                RecommendView(_bar: _bar)
                 SectionTabTitleView(title: "Places")
                 VStack{
                     Button(action: {
@@ -53,10 +24,10 @@ struct ContentView: View {
                         }
                         
                     }){
-                        SmallCardBarView(image: #imageLiteral(resourceName: "reco_1"),isLiked: false, bar: _bar)
+                        SmallBarCardView(bar: _bar)
                     }
                     .sheet(isPresented: $showSomeBarView) {
-                        BarView(bar: _bar)
+                        BarView(isLiked: true, bar: _bar)
                     }
                 }
             }
