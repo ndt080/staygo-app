@@ -32,9 +32,10 @@ namespace StayGo.Database.Repositories
             return _db.Bars.Where(b => b.Type == type);
         }
 
-        public IEnumerable<Bar> GetBarsByLocation(GeoCoordinate location)
+        public IEnumerable<Bar> GetBarsByLocation(double locationX, double locationY)
         {
-            return _db.Bars.Where(b => b.Location == location);
+            return _db.Bars.Where(b => (Math.Abs(b.LocationX - locationX) < 0.000001
+                                        && Math.Abs(b.LocationY - locationY) < 0.000001));
         }
 
         public Bar GetBar(int id)

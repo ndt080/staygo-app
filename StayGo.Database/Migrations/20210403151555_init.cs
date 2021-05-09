@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Device.Location;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StayGo.Database.Migrations
@@ -18,7 +19,9 @@ namespace StayGo.Database.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<byte>(type: "tinyint", nullable: false),
-                    AvgPayCheck = table.Column<double>(type: "float", nullable: false)
+                    AvgPayCheck = table.Column<double>(type: "float", nullable: false),
+                    LocationX = table.Column<GeoCoordinate>(type: "float", nullable: false),
+                    LocationY = table.Column<GeoCoordinate>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

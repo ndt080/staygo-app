@@ -35,9 +35,9 @@ namespace StayGo.Domain.Service
             return Task.Run(() => _barRepository.GetBarsByType(type));
         }
 
-        public Task<IEnumerable<Bar>> GetBarsByLocation(GeoCoordinate location)
+        public Task<IEnumerable<Bar>> GetBarsByLocation(double locationX,double locationY)
         {
-            return Task.Run(() => _barRepository.GetBarsByLocation(location));
+            return Task.Run(() => _barRepository.GetBarsByLocation(locationX,locationY));
         }
 
         public Task AddBar(Bar obj)

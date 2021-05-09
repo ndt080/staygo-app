@@ -56,14 +56,14 @@ namespace staygo_server.Controllers
 
         [HttpGet]
         [Route("GetByLocation")]
-        public async Task<IActionResult> GetBarsLoc(GeoCoordinate barLoc)
+        public async Task<IActionResult> GetBarsLoc(double barLocX, double barLocY)
         {
-            if (barLoc == null)
+            if (barLocX == 0 || barLocY == 0)
             {
                 return BadRequest();
             }
 
-            var output = await _barService.GetBarsByLocation(barLoc);
+            var output = await _barService.GetBarsByLocation(barLocX, barLocY);
             if (output == null)
             {
                 return NotFound();
@@ -121,7 +121,8 @@ namespace staygo_server.Controllers
                 Type = obj.Type,
                 Rating = obj.Rating,
                 AvgPayCheck = obj.AvgPayCheck,
-                Location = obj.Location
+                LocationX = obj.LocationX,
+                LocationY = obj.LocationY
             };
 
             await _barService.AddBar(input);
@@ -146,7 +147,8 @@ namespace staygo_server.Controllers
                 Type = obj.Type,
                 Rating = obj.Rating,
                 AvgPayCheck = obj.AvgPayCheck,
-                Location = obj.Location
+                LocationX = obj.LocationX,
+                LocationY = obj.LocationY
             };
 
             await _barService.AddBar(input);

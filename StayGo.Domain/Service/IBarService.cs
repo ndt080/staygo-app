@@ -10,7 +10,7 @@ namespace StayGo.Domain.Service
         public Task<Bar> GetBarById(int id);
         public Task<IEnumerable<Bar>> GetBarsByName(string name);
         public Task<IEnumerable<Bar>> GetBarsByType(string type);
-        public Task<IEnumerable<Bar>> GetBarsByLocation(GeoCoordinate location);
+        public Task<IEnumerable<Bar>> GetBarsByLocation(double locationX, double locationY);
         public Task<IEnumerable<Bar>> GetAllBars();
 
         public Task AddBar(Bar obj);

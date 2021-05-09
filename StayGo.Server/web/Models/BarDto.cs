@@ -12,6 +12,7 @@ namespace staygo_server.Models
         public string Type { get; set; }
         public byte Rating { get; set; }
         public double AvgPayCheck { get; set; }
-        public GeoCoordinate Location { get; set; }
+        public double LocationX { get; set; }
+        public double LocationY { get; set; }
     }
 }
