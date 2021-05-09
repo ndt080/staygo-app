@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Threading.Tasks;
 using StayGo.Domain.IRepository;
 using StayGo.Domain.Models;
@@ -34,9 +35,9 @@ namespace StayGo.Domain.Service
             return Task.Run(() => _barRepository.GetBarsByType(type));
         }
 
-        public Task<IEnumerable<Bar>> GetBarsByLocation(string location)
+        public Task<IEnumerable<Bar>> GetBarsByLocation(double locationX,double locationY)
         {
-            return Task.Run(() => _barRepository.GetBarsByType(location));
+            return Task.Run(() => _barRepository.GetBarsByLocation(locationX,locationY));
         }
 
         public Task AddBar(Bar obj)

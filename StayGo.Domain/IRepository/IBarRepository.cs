@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Device.Location;
 using StayGo.Domain.Models;
 
 namespace StayGo.Domain.IRepository
@@ -9,7 +10,7 @@ namespace StayGo.Domain.IRepository
         IEnumerable<Bar> GetAllBars();
         IEnumerable<Bar> GetBarsByName(string name);
         IEnumerable<Bar> GetBarsByType(string type);
-        IEnumerable<Bar> GetBarsByLocation(string location);
+        IEnumerable<Bar> GetBarsByLocation(double locationX, double locationY);
         void Create(Bar item);
         void Update(Bar item);
         void Delete(int id);

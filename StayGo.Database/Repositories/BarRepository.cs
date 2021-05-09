@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using StayGo.Database.Context;
@@ -31,9 +32,10 @@ namespace StayGo.Database.Repositories
             return _db.Bars.Where(b => b.Type == type);
         }
 
-        public IEnumerable<Bar> GetBarsByLocation(string location)
+        public IEnumerable<Bar> GetBarsByLocation(double locationX, double locationY)
         {
-            return _db.Bars.Where(b => b.Address == location);
+            return _db.Bars.Where(b => (Math.Abs(b.LocationX - locationX) < 0.000001
+                                        && Math.Abs(b.LocationY - locationY) < 0.000001));
         }
 
         public Bar GetBar(int id)
