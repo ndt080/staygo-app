@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Device.Location;
 
 namespace staygo_server.Models
 {
@@ -11,5 +12,6 @@ namespace staygo_server.Models
         public string Type { get; set; }
         public byte Rating { get; set; }
         public double AvgPayCheck { get; set; }
+        public GeoCoordinate Location { get; set; }
     }
 }

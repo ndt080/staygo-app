@@ -1,3 +1,4 @@
+using System.Device.Location;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StayGo.Domain.Models;
@@ -55,7 +56,7 @@ namespace staygo_server.Controllers
 
         [HttpGet]
         [Route("GetByLocation")]
-        public async Task<IActionResult> GetBarsLoc(string barLoc) // GeoCoordinates?
+        public async Task<IActionResult> GetBarsLoc(GeoCoordinate barLoc)
         {
             if (barLoc == null)
             {
@@ -119,7 +120,8 @@ namespace staygo_server.Controllers
                 Description = obj.Description,
                 Type = obj.Type,
                 Rating = obj.Rating,
-                AvgPayCheck = obj.AvgPayCheck
+                AvgPayCheck = obj.AvgPayCheck,
+                Location = obj.Location
             };
 
             await _barService.AddBar(input);
@@ -143,7 +145,8 @@ namespace staygo_server.Controllers
                 Description = obj.Description,
                 Type = obj.Type,
                 Rating = obj.Rating,
-                AvgPayCheck = obj.AvgPayCheck
+                AvgPayCheck = obj.AvgPayCheck,
+                Location = obj.Location
             };
 
             await _barService.AddBar(input);

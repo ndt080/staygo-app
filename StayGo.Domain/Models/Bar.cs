@@ -1,3 +1,5 @@
+using System.Device.Location;
+
 namespace StayGo.Domain.Models
 {
     public class Bar
@@ -9,5 +11,6 @@ namespace StayGo.Domain.Models
         public string Type { get; set; }
         public byte Rating { get; set; }
         public double AvgPayCheck { get; set; }
+        public GeoCoordinate Location { get; set; }
     }
 }
