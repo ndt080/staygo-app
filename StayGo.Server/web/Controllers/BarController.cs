@@ -116,6 +116,7 @@ namespace staygo_server.Controllers
             {
                 Id = obj.Id,
                 Name = obj.Name,
+                Image = obj.Image,
                 Address = obj.Address,
                 Description = obj.Description,
                 Type = obj.Type,
@@ -142,6 +143,7 @@ namespace staygo_server.Controllers
             {
                 Id = obj.Id,
                 Name = obj.Name,
+                Image = obj.Image,
                 Address = obj.Address,
                 Description = obj.Description,
                 Type = obj.Type,

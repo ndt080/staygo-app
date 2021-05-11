@@ -53,6 +53,7 @@ namespace staygo_server.Controllers
             {
                 Id = obj.Id,
                 Name = obj.Name,
+                Avatar = obj.Avatar,
                 DateBirth = obj.DateBirth
             };
 
@@ -73,6 +74,7 @@ namespace staygo_server.Controllers
             {
                 Id = obj.Id,
                 Name = obj.Name,
+                Avatar = obj.Avatar,
                 DateBirth = obj.DateBirth
             };
 
