@@ -10,6 +10,7 @@ namespace StayGo.Domain.IRepository
         IEnumerable<Bar> GetAllBars();
         IEnumerable<Bar> GetBarsByName(string name);
         IEnumerable<Bar> GetBarsByType(string type);
+        IEnumerable<Bar> GetBarsByRate(string rate);
         IEnumerable<Bar> GetBarsByLocation(double locationX, double locationY);
         void Create(Bar item);
         void Update(Bar item);

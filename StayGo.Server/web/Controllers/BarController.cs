@@ -35,6 +35,23 @@ namespace staygo_server.Controllers
 
             return Ok(output);
         }
+        [HttpGet]
+        [Route("GetByRate")]
+        public async Task<IActionResult> GetBarByRate(int rate)
+        {
+            if (rate < 0)
+            {
+                return NotFound();
+            }
+
+            var output = await _barService.GetBarsByRate(rate.ToString());
+            if (output == null)
+            {
+                NotFound();
+            }
+            
+            return Ok(output);
+        }
 
         [HttpGet]
         [Route("GetByName")]
@@ -103,7 +120,7 @@ namespace staygo_server.Controllers
             return Ok(output);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> UpdateBar(BarDto obj)
         {
@@ -130,7 +147,7 @@ namespace staygo_server.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("Add")]
         public async Task<IActionResult> AddBar(BarDto obj)
         {
