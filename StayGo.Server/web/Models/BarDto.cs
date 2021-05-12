@@ -11,9 +11,9 @@ namespace staygo_server.Models
         public string Address { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
-        public int Rating { get; set; }
-        public double AvgPayCheck { get; set; }
-        public double LocationX { get; set; }
-        public double LocationY { get; set; }
+        public string Rating { get; set; }
+        public string AvgPayCheck { get; set; }
+        public string LocationX { get; set; }
+        public string LocationY { get; set; }
     }
 }

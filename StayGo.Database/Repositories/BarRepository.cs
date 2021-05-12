@@ -31,11 +31,16 @@ namespace StayGo.Database.Repositories
         {
             return _db.Bars.Where(b => b.Type == type);
         }
+        public IEnumerable<Bar> GetBarsByRate(string rate)
+        {
+            double rate_ = Convert.ToDouble(rate);
+            return _db.Bars.Where(b => Convert.ToDouble(b.Rating) >= rate_);
+        }
 
         public IEnumerable<Bar> GetBarsByLocation(double locationX, double locationY)
         {
-            return _db.Bars.Where(b => (Math.Abs(b.LocationX - locationX) < 0.000001
-                                        && Math.Abs(b.LocationY - locationY) < 0.000001));
+            return _db.Bars.Where(b => (Math.Abs(Convert.ToDouble(b.LocationX) - Convert.ToDouble(locationX)) < 0.000001
+                                        && Math.Abs(Convert.ToDouble(b.LocationY) - Convert.ToDouble(locationY)) < 0.000001));
         }
 
         public Bar GetBar(int id)
@@ -62,6 +67,7 @@ namespace StayGo.Database.Repositories
             Bar bar = _db.Bars.Find(id);
             if (bar != null)
                 _db.Bars.Remove(bar);
+            Save();
         }
 
         private void Save()

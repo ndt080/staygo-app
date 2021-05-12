@@ -31,7 +31,7 @@ namespace StayGo.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("AvgPayCheck")
-                        .HasColumnType("float");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -41,17 +41,19 @@ namespace StayGo.Database.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Rating")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
                     
                     b.Property<double>("LocationX")
-                        .HasColumnType("float");
+                        .HasColumnType("nvarchar(max)");
                     
                     b.Property<double>("LocationY")
-                        .HasColumnType("float");
+                        .HasColumnType("nvarchar(max)");
                     
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
                     b.HasKey("Id");
 
                     b.ToTable("Bar");

@@ -15,13 +15,14 @@ namespace StayGo.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)",nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<byte>(type: "tinyint", nullable: false),
-                    AvgPayCheck = table.Column<double>(type: "float", nullable: false),
-                    LocationX = table.Column<GeoCoordinate>(type: "float", nullable: false),
-                    LocationY = table.Column<GeoCoordinate>(type: "float", nullable: false)
+                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AvgPayCheck = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocationX = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocationY = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

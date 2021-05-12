@@ -34,6 +34,10 @@ namespace StayGo.Domain.Service
         {
             return Task.Run(() => _barRepository.GetBarsByType(type));
         }
+        public Task<IEnumerable<Bar>> GetBarsByRate(string rate)
+        {
+            return Task.Run(() => _barRepository.GetBarsByRate(rate));
+        }
 
         public Task<IEnumerable<Bar>> GetBarsByLocation(double locationX,double locationY)
         {
