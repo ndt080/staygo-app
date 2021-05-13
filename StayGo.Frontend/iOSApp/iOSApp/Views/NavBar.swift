@@ -6,10 +6,10 @@ struct NavBar: View {
     var body: some View {
         TabView(selection: $selection) {
             HomeView().edgesIgnoringSafeArea(.all)
-            .tabItem {
-                Image(systemName: "house")
-                Text("Home")
-            }
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
             MapView()
                 .tabItem {
                     Image(systemName: "map")

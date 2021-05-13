@@ -25,19 +25,19 @@ struct MapSheet: View {
                                 .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
                         }.padding(.leading, 10)
                         
-                            NavigationLink(destination: BarView(isLiked: true, bar: obj)) {
-                                VStack{
-                                    HStack(alignment: .center){
-                                        Image(systemName: "arrow.right")
-                                            .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
-                                    }
-                                    .padding(.all, 10)
-                                    .background(Color.gray.opacity(0.1))
-                                    .shadow(radius: 10)
-                                    .cornerRadius(10)
+                        NavigationLink(destination: BarView(isLiked: true, bar: obj)) {
+                            VStack{
+                                HStack(alignment: .center){
+                                    Image(systemName: "arrow.right")
+                                        .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
                                 }
-                                .padding(.leading, 10)
+                                .padding(.all, 10)
+                                .background(Color.gray.opacity(0.1))
+                                .shadow(radius: 10)
+                                .cornerRadius(10)
                             }
+                            .padding(.leading, 10)
+                        }
                         
                     }.padding(.all, 10)
                     .frame(width: 300, height: 104, alignment: .center)
