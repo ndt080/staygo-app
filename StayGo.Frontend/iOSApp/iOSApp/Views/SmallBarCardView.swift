@@ -1,49 +1,76 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SmallBarCardView : View {
+    var image: String
+    var title: String
+    var type: String
+    var price: Double
+    @State var animated: Bool = false
     @Environment(\.colorScheme) var colorScheme
-    @State var bar: Bar
-    
+
     var body: some View {
-        HStack(alignment: .top){
-            Image(bar.image)
+        HStack(alignment: .center){
+            WebImage(url: URL(string: image), isAnimating: self.$animated)
                 .resizable()
-                .frame(width: 66, height: 66)
+                .frame(width: 86, height: 66)
                 .aspectRatio(1, contentMode: .fill)
                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
 
             VStack(alignment: .leading){
                 VStack(alignment: .leading){
-                    Text(bar.name)
+                    Text(title)
                         .font(.title3)
                         .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
-                    Text(bar.description)
+                    Text(type)
                         .font(.headline)
                         .fontWeight(.light)
                         .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
                 }
-                
-                HStack(spacing: 0) {
-                    var counter = 0
-                    ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                        Image(systemName: bar.rate > counter ? "star" : "star.fill")
-                            .renderingMode(.template)
-                            .foregroundColor(Color("PrimaryColor"))
-                            .onTapGesture {
-                                counter+=1
-                            }
-                    }
-                    
+            }.padding(.leading, 10)
+            VStack{
+                HStack(alignment: .center){
+                    Image(systemName: "arrow.right")
+                        .foregroundColor(colorScheme != .dark ? Color.black : Color.white)
                 }
+                .padding(.all, 10)
+                .background(colorScheme == .dark ? BlurView(style: .systemMaterial) : nil)
+                .background(colorScheme == .light ? Color.gray.opacity(0.1) : nil)
+                .shadow(radius: 10)
+                .cornerRadius(10)
             }
-        }.frame(width: 327, height: 84, alignment: .leading)
+            .padding(.leading, 10)
+                
+        }.padding(.all, 10)
+        .frame(maxWidth: .infinity, maxHeight: 104, alignment: .center)
+        .background(BlurView(style: .systemMaterial))
+        .cornerRadius(10)
     }
-}
+    
 
-struct SmallBarCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        let bar : Bar = Bar.init()
-        SmallBarCardView(bar: bar)
-            .previewDevice("iPhone 12 Pro")
-    }
+//
+//    var body: some View {
+//        HStack(alignment: .center) {
+//            Image(image)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 100)
+//                .cornerRadius(10)
+//                .padding(.all, 15)
+//
+//            VStack(alignment: .leading) {
+//                Text(title)
+//                    .font(.system(size: 26, weight: .bold, design: .default))
+//                    .foregroundColor(.gray)
+//                Text(type)
+//                    .font(.subheadline)
+//                    .foregroundColor(.gray)
+//            }.padding(.trailing, 15)
+//            .padding(.vertical, 15)
+//        }
+//        .frame(maxWidth: .infinity, maxHeight: 100, alignment: .center)
+//        .background(BlurView(style: .systemMaterial))
+
+//        .padding(.all, 10)
+//    }
 }

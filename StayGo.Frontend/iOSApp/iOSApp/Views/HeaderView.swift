@@ -2,10 +2,8 @@ import SwiftUI
 
 struct HeaderView: View {
     var body: some View {
-        HomeNavBar()
-        
         Text("Hello, Emma")
-            .font(.caption)
+            .font(.headline)
             .fontWeight(.medium)
             .foregroundColor(Color("GrayColor"))
         
