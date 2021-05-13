@@ -1,8 +1,10 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @EnvironmentObject var str: Storage
+    
     var body: some View {
-        Text("Hello, Emma")
+        Text("Hello, " + str.userInfo[1])
             .font(.headline)
             .fontWeight(.medium)
             .foregroundColor(Color("GrayColor"))

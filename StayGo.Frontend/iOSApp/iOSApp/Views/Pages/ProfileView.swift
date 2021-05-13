@@ -6,14 +6,14 @@ struct ProfileView: View {
     @EnvironmentObject var str: Storage
     
     func logOut(){
-        do{
+        do {
             GIDSignIn.sharedInstance().signOut()
             try! Auth.auth().signOut()
         }
     }
     
     var body: some View {
-        VStack{
+        VStack {
             Form {
                 Section(header: Text("User info")) {
                     HStack(){
@@ -34,7 +34,7 @@ struct ProfileView: View {
                     }
                 }
             }
-
+            
         }
     }
 }

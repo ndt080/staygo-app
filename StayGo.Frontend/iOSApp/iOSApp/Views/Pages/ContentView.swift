@@ -5,7 +5,7 @@ import GoogleSignIn
 struct ContentView: View {
     @ObservedObject var session = SessionStore()
     @EnvironmentObject var str: Storage
-
+    
     var body: some View {
         if !session.isLoggedIn {
             SignInView()
@@ -15,7 +15,7 @@ struct ContentView: View {
             } else {
                 LoaderView()
             }
-       }
+        }
         
     }
 }

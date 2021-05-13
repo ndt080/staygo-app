@@ -21,7 +21,7 @@ struct BigCardBarView: View {
             VStack(){
                 HStack(){
                     Spacer()
-                    Button(action:{
+                    Button(action: {
                         isLiked = !isLiked
                     })
                     {
@@ -60,22 +60,8 @@ struct BigCardBarView: View {
                 .padding()
             }
             .frame(width: 209, height: 254)
-//            .background(
-//                Image(bar.image)
-//                    .resizable()
-//                    .scaledToFill()
-//                    .edgesIgnoringSafeArea(.all)
-//            )
             .clipShape(RoundedRectangle(cornerRadius: 15.0))
             .shadow(radius: 7)
         }
     }
 }
-
-//struct BigBarCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let bar : Bar = Bar.init()
-//        BigCardBarView(isLiked: true, bar: bar)
-//            .previewDevice("iPhone 12 Pro")
-//    }
-//}

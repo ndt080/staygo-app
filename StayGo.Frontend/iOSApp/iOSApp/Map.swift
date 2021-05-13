@@ -4,9 +4,7 @@ import MapKit
 struct Map: UIViewRepresentable {
     @Binding var landmarks: [LandmarkAnnotation]
     @Binding var isClicked: Bool
-    @Binding var selectedAnnotation: MKAnnotation?
-
-    
+    @Binding var selectedAnnotation: MKAnnotation?    
     let manager : CLLocationManager = CLLocationManager()
     
     func makeCoordinator() -> Coordinator {

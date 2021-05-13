@@ -24,7 +24,7 @@ struct SignInView: View {
         }.frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height, alignment: .center)
         .background(RadialGradient(gradient: Gradient(colors: [.blue, .purple]), center: .center, startRadius: 2, endRadius: 650))
         .edgesIgnoringSafeArea(.all)
-
+        
     }
 }
 
