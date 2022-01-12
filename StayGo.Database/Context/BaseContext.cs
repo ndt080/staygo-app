@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using StayGo.Domain.Models;
 
@@ -24,7 +25,7 @@ namespace StayGo.Database.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlite(_configuration.GetConnectionString("StayGoDB"));
+            options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL_DOTNET"));
         }
     }
 }
