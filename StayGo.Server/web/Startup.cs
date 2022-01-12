@@ -25,11 +25,7 @@ namespace staygo_server
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BaseContext>(
-                x => x.UseSqlServer(
-                    Configuration.GetConnectionString("AzureSQLConnection"),
-                    y => y.MigrationsAssembly("../../StayGo.Database"))
-            );
+            services.AddDbContext<BaseContext>();
 
             services.AddControllers();
             services.AddScoped<IBarService, BarService>();
@@ -43,19 +39,18 @@ namespace staygo_server
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StayGo app v1"));
-            }
-
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StayGo app v1"));
+            
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
