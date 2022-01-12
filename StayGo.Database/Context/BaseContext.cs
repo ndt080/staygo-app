@@ -1,33 +1,30 @@
-﻿using StayGo.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using StayGo.Domain.Models;
 
 namespace StayGo.Database.Context
 {
-    public class BaseContext: DbContext
+    public sealed class BaseContext : DbContext
     {
-        public BaseContext(DbContextOptions<BaseContext> options) : base(options)
+        public BaseContext(IConfiguration configuration)
         {
+            _configuration = configuration;
             Database.EnsureCreated();
         }
+        
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public BaseContext(){}
-        
+
+        private readonly IConfiguration _configuration;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Bar>().ToTable("Bar");
-            builder.Entity<Bar>().HasKey(p => p.Id);
-            builder.Entity<Bar>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Bar>().Property(p => p.Id).IsRequired();
-            builder.Entity<Bar>().Property(p => p.Name).IsRequired();
-
-            builder.Entity<Customer>().ToTable("Customer");
-            builder.Entity<Customer>().HasKey(p => p.Id);
-            builder.Entity<Customer>().Property(p => p.Id).ValueGeneratedOnAdd();
-            builder.Entity<Customer>().Property(p => p.Id).IsRequired();
-            builder.Entity<Customer>().Property(p => p.Name).IsRequired();
-            
             base.OnModelCreating(builder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlite(_configuration.GetConnectionString("StayGoDB"));
         }
     }
 }

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">StayGo</string>
+    <string name="title_home">Home</string>
+    <string name="title_map">Map</string>
+    <string name="title_account">Account</string>
+    <string name="home_title">Where do you wonna go today?</string>
+    <string name="Search">Search</string>
+</resources>

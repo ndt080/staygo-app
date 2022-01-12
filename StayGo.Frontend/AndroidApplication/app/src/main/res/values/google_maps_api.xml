@@ -1,0 +1,4 @@
+<resources>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyD16csmN99QqIiAxhAk2k6bu5cXJyqtLRI</string>
+    <string name="my_web_client_id" templateMergeStrategy="preserve" translatable="false">345733011542-uk6em8lbrpi4p9au6e68amlar8324snd.apps.googleusercontent.com</string>
+</resources>
