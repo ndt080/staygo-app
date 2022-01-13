@@ -25,6 +25,9 @@ and follow our on GitHub:
 <a href="https://github.com/EvelynAbilova"  target="_blank">@EvelynAbilova</a>
 <a href="https://github.com/alex-yas"  target="_blank">@alex-yas</a>
 
+</br>
+</br>
+</br>
 
 ## `AndroidSDK` Android application
 
@@ -33,7 +36,7 @@ and follow our on GitHub:
 ### About
 
 The application is developed using:
-> libraries: google-play/Map, GooglePlay/Auth, OkHttp </br>
+> libraries: play-services-map, play-services-auth, okhttp3 </br>
 
 The application uses the developed by us on dotnet ASP.Net RESTful api service
 
