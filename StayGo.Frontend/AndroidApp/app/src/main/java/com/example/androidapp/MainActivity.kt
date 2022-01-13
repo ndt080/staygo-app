@@ -1,34 +1,129 @@
 package com.example.androidapp
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.androidapp.databinding.ActivityMainBinding
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
+import androidx.preference.PreferenceManager
+import com.example.androidapp.models.Bar
+import com.example.androidapp.models.User
+import com.example.androidapp.utils.ApiUtil
+import com.example.androidapp.utils.DataUtil
+import com.example.androidapp.utils.OkHttpRequest
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.example.androidapp.utils.StorageUtil
+import com.google.android.material.internal.ContextUtils.getActivity
+import com.google.gson.Gson
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Response
+import java.io.IOException
+
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 9001
+    lateinit var storage: StorageUtil;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_main)
         this.supportActionBar?.hide();
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val activityPreferences = PreferenceManager.getDefaultSharedPreferences(this@MainActivity);
+        storage = StorageUtil(activityPreferences);
 
-        val navView: BottomNavigationView = binding.navView
+        if (storage.getUserInfo() != null) {
+            loadData();
+            return;
+        }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_map, R.id.navigation_account))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this@MainActivity, gso)
+
+        val loginBtn = findViewById<Button>(R.id.google_login_btn)
+        loginBtn.setOnClickListener { signIn() }
+    }
+
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun signOut() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(this) { }
+    }
+
+    private fun revokeAccess() {
+        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this) { }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+            val user = User(
+                id = account?.id ?: "",
+                giveName = account?.givenName ?: "",
+                familyName = account?.familyName ?: "",
+                email = account?.email ?: "",
+                photoUrl = account?.photoUrl.toString(),
+                idToken = account?.idToken ?: "",
+            )
+            storage.saveUserInfo(user);
+            loadData();
+        } catch (e: ApiException) {
+            Log.e("failed code=", e.statusCode.toString())
+        }
+    }
+
+    private fun startAppActivity() {
+        this.startActivity(Intent(this@MainActivity, AppActivity::class.java))
+    }
+
+    fun loadData() {
+        if (DataUtil().bars.isEmpty()) {
+            val client = OkHttpClient()
+            val request = OkHttpRequest(client)
+
+            request.GET("https://api-staygo.herokuapp.com/api/Bar/GetAll", object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("Request Failure.")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val responseData = response.body?.string()
+                    val gson = Gson();
+
+                    this@MainActivity.runOnUiThread(Runnable() {
+                        run {
+                            val result = gson.fromJson(responseData, Array<Bar>::class.java)
+                            DataUtil().setBars(result);
+                            startAppActivity();
+                        }
+                    })
+                }
+            })
+        } else {
+            startAppActivity();
+        }
     }
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="getAllBarsApi" templateMergeStrategy="preserve" translatable="false">https://api-staygo.herokuapp.com/api/Bar/GetAll</string>
+</resources>
