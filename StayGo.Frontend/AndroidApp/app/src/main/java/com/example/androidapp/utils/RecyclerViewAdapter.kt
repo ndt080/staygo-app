@@ -11,6 +11,7 @@ import com.example.androidapp.models.Bar
 import com.example.androidapp.utils.DataUtil
 
 import com.example.androidapp.utils.loadImageWithUri
+import org.w3c.dom.Text
 import java.util.ArrayList
 
 class RecyclerViewAdapter internal constructor(private var barList: List<Bar>,  private val listener: (Bar) -> Unit) :
@@ -24,6 +25,7 @@ class RecyclerViewAdapter internal constructor(private var barList: List<Bar>,  
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val bar = barList[position]
         holder.title.text = bar.name
+        holder.description.text = bar.description
         loadImageWithUri(holder.image, bar.image)
         holder.itemView.setOnClickListener { listener(bar) }
     }
@@ -33,12 +35,14 @@ class RecyclerViewAdapter internal constructor(private var barList: List<Bar>,  
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView
-        val image: ImageView
+        val title: TextView;
+        val description: TextView;
+        val image: ImageView;
         private val cardView: CardView
 
         init {
             title = itemView.findViewById(R.id.title)
+            description = itemView.findViewById(R.id.description)
             image = itemView.findViewById(R.id.image)
             cardView = itemView.findViewById(R.id.carView)
         }

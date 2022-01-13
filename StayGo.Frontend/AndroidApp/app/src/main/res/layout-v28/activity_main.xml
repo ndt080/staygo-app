@@ -15,7 +15,6 @@
         android:layout_centerInParent="true"
         android:background="@drawable/rounded_corners"
         android:drawableStart="@drawable/google_icon"
-        android:drawableLeft="@drawable/google_icon"
         android:drawablePadding="8dp"
         android:padding="8dp"
         android:text="Sign in with Google"
@@ -26,8 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.673"
-        tools:targetApi="p" />
+        app:layout_constraintVertical_bias="0.673" />
 
     <TextView
         android:id="@+id/auth_title"

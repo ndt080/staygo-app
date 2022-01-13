@@ -4,35 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.androidapp.R
 import com.example.androidapp.databinding.FragmentHomeBinding
-import android.widget.ListView
-import android.widget.Toast
-
-import com.example.androidapp.MainActivity
-
-import android.graphics.Movie
-
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import androidx.recyclerview.widget.RecyclerView
-
 import RecyclerViewAdapter
 import android.widget.SearchView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.example.androidapp.models.Bar
 import com.example.androidapp.utils.DataUtil
+import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
-
-    private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -40,12 +25,10 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val bars = DataUtil().bars;
+        val gson = Gson();
 
         val searchView = root.findViewById<SearchView>(R.id.searchView)
         val recyclerView = root.findViewById<RecyclerView>(R.id.recyclerView);
@@ -53,6 +36,9 @@ class HomeFragment : Fragment() {
 
         val recyclerViewAdapter: RecyclerViewAdapter = RecyclerViewAdapter(bars) { item ->
             println(item)
+            val bundle = Bundle()
+            bundle.putString("item", gson.toJson(item))
+            findNavController().navigate(R.id.navigation_details, bundle)
         };
         recyclerView.layoutManager = layoutManager
 
@@ -70,8 +56,4 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

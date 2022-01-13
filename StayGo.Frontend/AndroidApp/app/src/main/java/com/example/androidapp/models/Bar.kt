@@ -8,7 +8,7 @@ class Bar(
     val address: String,
     val description: String,
     val type: String,
-    val rating: Int,
+    val rating: Float,
     val avgPayCheck: Double,
     val locationX: Double,
     val locationY: Double,

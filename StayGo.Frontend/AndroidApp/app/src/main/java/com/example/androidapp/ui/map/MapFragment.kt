@@ -5,22 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.androidapp.AppActivity
 import com.example.androidapp.R
-import androidx.lifecycle.ViewModelProvider
+import com.example.androidapp.utils.DataUtil
 import com.example.androidapp.databinding.FragmentMapBinding
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.androidapp.utils.DataUtil
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Marker
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+@DelicateCoroutinesApi
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var mMap: GoogleMap
-    private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentMapBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,14 +30,10 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-        val mapView = root.findViewById<MapView>(R.id.mapView);
+        val mapView = root.findViewById<MapView>(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
@@ -48,17 +46,20 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-
-        mMap = googleMap
-
         val bars = DataUtil().bars;
+        mMap = googleMap
 
         for (bar in bars) {
             val location = LatLng(bar.locationX, bar.locationY)
             mMap.addMarker(MarkerOptions().position(location).title(bar.name))
         }
 
-        val defaultLocation = LatLng(53.89074, 27.54478)
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation));
+        mMap.uiSettings.isZoomControlsEnabled = true
+        mMap.setOnMarkerClickListener(this)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(53.89074, 27.54478)))
+    }
+
+    override fun onMarkerClick(p0: Marker): Boolean {
+        TODO("Not yet implemented")
     }
 }

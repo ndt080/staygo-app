@@ -8,33 +8,54 @@
     cardView:cardCornerRadius="8dp"
     cardView:cardElevation="8dp"
     android:layout_margin="8dp">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/image"
-            android:scaleType="centerCrop"
-            tools:background="@tools:sample/backgrounds/scenic"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            cardView:layout_constraintStart_toStartOf="parent"
-            cardView:layout_constraintTop_toTopOf="parent"/>
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-smallcaps"
-            android:gravity="center_vertical"
-            android:layout_margin="8dp"
-            cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintLeft_toRightOf="@id/image"
-            cardView:layout_constraintRight_toRightOf="parent"
-            cardView:layout_constraintBottom_toBottomOf="parent"
-            android:lines="1"
-            android:padding="5dp"
-            android:textStyle="bold"
-            tools:text="@tools:sample/full_names"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@android:color/black" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:minLines="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:singleLine="false" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

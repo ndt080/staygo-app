@@ -4,33 +4,46 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.example.androidapp.AppActivity
 import com.example.androidapp.R
 import com.example.androidapp.databinding.FragmentAccountBinding
+import com.example.androidapp.utils.loadImageWithUri
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 class AccountFragment : Fragment() {
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    lateinit var mGoogleSignInClient: GoogleSignInClient
     private var _binding: FragmentAccountBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        notificationsViewModel =ViewModelProvider(this).get(NotificationsViewModel::class.java)
-
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val appNameField = root.findViewById<TextView>(R.id.field_app_name)
-        appNameField.text = "StayGo";
+        mGoogleSignInClient = (activity as AppActivity).mGoogleSignInClient
+        val storage = (activity as AppActivity).storage
+        val user = storage.getUserInfo();
 
-        val appVersionField = root.findViewById<TextView>(R.id.field_app_version)
-        appVersionField.text = "v0.1";
+        if(user != null) {
+            val nameField = root.findViewById<TextView>(R.id.user_name)
+            nameField.text = user.giveName + " " + user.familyName;
+            val emailField = root.findViewById<TextView>(R.id.user_email)
+            emailField.text = user.email
+            val avatarField = root.findViewById<ImageView>(R.id.profileImg)
+            loadImageWithUri(avatarField, user.photoUrl);
+        }
+
+        val logoutBtn = root.findViewById<Button>(R.id.logout_btn);
+        logoutBtn.setOnClickListener { view ->
+            (activity as AppActivity).signOut();
+        }
 
         return root
     }
