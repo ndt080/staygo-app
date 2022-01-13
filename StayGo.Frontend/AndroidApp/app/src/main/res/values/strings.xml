@@ -6,6 +6,9 @@
     <string name="title_details">More about the bar</string>
     <string name="home_title">Where do you want to go today?</string>
     <string name="Search">Search</string>
+    <string name="places">Places</string>
+    <string name="auth_title">Sign In</string>
+    <string name="auth_btn_title">Sign in with Google</string>
     <string name="profile_user_name_title">Name</string>
     <string name="profile_user_email_title">Email</string>
     <string name="profile_logout_btn_title">Logout</string>

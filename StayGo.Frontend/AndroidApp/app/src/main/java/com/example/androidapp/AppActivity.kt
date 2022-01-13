@@ -17,7 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.DelicateCoroutinesApi
 import okhttp3.*
 
-
 @DelicateCoroutinesApi
 class AppActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient

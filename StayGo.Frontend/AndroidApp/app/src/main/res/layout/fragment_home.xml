@@ -38,19 +38,6 @@
 
     </SearchView>
 
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextTextPersonName"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_margin="20dp"-->
-<!--        android:hint="Search..."-->
-<!--        android:paddingTop="5dp"-->
-<!--        android:paddingBottom="5dp"-->
-<!--        android:paddingRight="10dp"-->
-<!--        android:paddingLeft="10dp"-->
-<!--        android:background="@drawable/search_background" />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -61,7 +48,7 @@
             android:id="@+id/subtitle_places"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Places"
+            android:text="@string/places"
             android:textColor="@color/black"
             android:textSize="26sp"
             android:textStyle="bold" />

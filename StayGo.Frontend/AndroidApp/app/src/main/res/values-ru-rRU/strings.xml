@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StayGo</string>
+    <string name="title_home">Главная</string>
+    <string name="title_map">Карта</string>
+    <string name="title_account">Аккаунт</string>
+    <string name="title_details">Подробнее о баре</string>
+    <string name="home_title">Куда пойдем сегодня?</string>
+    <string name="Search">Поиск</string>
+    <string name="places">Места</string>
+    <string name="auth_title">Вход</string>
+    <string name="auth_btn_title">Войти через Google</string>
+    <string name="profile_user_name_title">Имя</string>
+    <string name="profile_user_email_title">Email</string>
+    <string name="profile_logout_btn_title">Выйти</string>
+</resources>
