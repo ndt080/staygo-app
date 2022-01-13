@@ -25,6 +25,28 @@ and follow our on GitHub:
 <a href="https://github.com/EvelynAbilova"  target="_blank">@EvelynAbilova</a>
 <a href="https://github.com/alex-yas"  target="_blank">@alex-yas</a>
 
+</br>
+</br>
+</br>
+
+## `AndroidSDK` Android application
+
+<img align="left" src="StayGo.Frontend/Screenshots/ScreenRecord_IOSapp.gif" width="150">
+
+### About
+
+The application is developed using:
+> libraries: play-services-map, play-services-auth, okhttp3 </br>
+
+The application uses the developed by us on dotnet ASP.Net RESTful api service
+
+If you like the project, do not forget to `put star ★`  
+and follow our on GitHub:
+<a href="https://github.com/ndt080" target="_blank">@ndt080</a>
+<a href="https://github.com/varff"  target="_blank">@varff</a>
+<a href="https://github.com/pzmicer"  target="_blank">@pzmicer</a>
+<a href="https://github.com/pavelhardzei"  target="_blank">@pavelhardzei</a>
+
 
 
 
